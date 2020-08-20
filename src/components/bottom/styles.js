@@ -2,7 +2,6 @@ import { StyleSheet } from 'react-native';
 
 export default StyleSheet.create({
     bottomContainer: {
-        backgroundColor:'#1b8460',
         borderColor:'black',
         borderWidth:3,
         width: 350,
@@ -12,7 +11,6 @@ export default StyleSheet.create({
     },
 
     answerButton: {
-        backgroundColor:'#1b8460',
         borderColor:'black',
         borderWidth:1,
         flex:1,

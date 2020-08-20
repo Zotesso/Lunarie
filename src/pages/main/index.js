@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {View, StatusBar, Animated} from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
@@ -14,6 +14,8 @@ export default function Main(){
     let offset = 0;
     const translateY = new Animated.Value(0);
 
+    const [backColor, setBackColor] = useState('#333');
+
     const onGestureEvent = Animated.event(
         [
       
@@ -21,7 +23,7 @@ export default function Main(){
             nativeEvent:{
               translationY: translateY,
                 },
-            }, alert(translateY),
+            },
        ],
        {useNativeDriver: true},
     );
@@ -42,11 +44,11 @@ export default function Main(){
             }
 
             Animated.timing(translateY, {
-                toValue: opened ? -575 : 0,
+                toValue: opened ? -655 : 0,
                 duration:200,
                 useNativeDriver:true,
             }).start(() => {
-                offset = opened ? -575 : 0;
+                offset = opened ? -655 : 0;
                 translateY.setOffset(offset);
                 translateY.setValue(0);
             });
@@ -58,9 +60,11 @@ export default function Main(){
           <StatusBar barStyle="light-content" backgroundColor="#1d1d1e"/>
           <View style={styles.imageView}>
           
-          <Enemy />
+          <Enemy backColor={backColor}/>
           </View>
-          <Bottom> </Bottom>
+          <Bottom
+            backColor={backColor}
+          />
             <PanGestureHandler
                 onGestureEvent={onGestureEvent}
                 onHandlerStateChange={onHandlerStateChange}
@@ -70,7 +74,7 @@ export default function Main(){
                         position:'absolute',
                         height:'96%',
                         zIndex:50,
-                        bottom:-565,
+                        bottom:'-90%',
                         alignItems: 'center',
                         opacity: translateY.interpolate({
                             inputRange:[-300,0],
@@ -78,14 +82,16 @@ export default function Main(){
                         }),
                         transform: [{
                             translateY:translateY.interpolate({
-                                inputRange:[-575 ,0],
-                                outputRange:[-575, 0],
+                                inputRange:[-650 ,0],
+                                outputRange:[-650, 0],
                                 extrapolate:'clamp',
                             }),
                         }]
                     }]}
                 >
-                    <Menu />
+                    <Menu 
+                        setBackColor={setBackColor}
+                    />
                     <Icon name='keyboard-arrow-up' 
           size={30} 
           color='white' 

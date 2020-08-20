@@ -3,22 +3,22 @@ import {View, Text, TouchableOpacity} from 'react-native';
 
 import styles from './styles';
 
-export default function Bottom(){
+export default function Bottom(props){
     return(
         //Answer Options
-          <View style={styles.bottomContainer}>
+          <View style={[styles.bottomContainer, {backgroundColor: props.backColor}]}>
               <View >
 
-                <TouchableOpacity style={styles.answerButton}>
+                <TouchableOpacity style={[styles.answerButton, {backgroundColor: props.backColor}]}>
                     <Text style={{color: 'white'}}>A</Text>
                 </TouchableOpacity>
-                <TouchableOpacity style={styles.answerButton}>
+                <TouchableOpacity style={[styles.answerButton, {backgroundColor: props.backColor}]}>
                     <Text style={{color: 'white'}}>B</Text>
                 </TouchableOpacity>
-                <TouchableOpacity style={styles.answerButton}>
+                <TouchableOpacity style={[styles.answerButton, {backgroundColor: props.backColor}]}>
                     <Text style={{color: 'white'}}>C</Text>
                 </TouchableOpacity>
-                <TouchableOpacity style={styles.answerButton}>
+                <TouchableOpacity style={[styles.answerButton, {backgroundColor: props.backColor}]}>
                     <Text style={{color: 'white'}}>D</Text>
                 </TouchableOpacity>
 
