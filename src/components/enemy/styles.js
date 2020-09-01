@@ -11,19 +11,20 @@ export default StyleSheet.create({
 
     item: {
         zIndex: 5,
-        marginVertical: moderateScale(7, 2),
-        flexDirection: 'row'
+        flexDirection: 'row',
+        width: '120%',
+        alignSelf: 'center',
      },
      itemIn: {
-         marginLeft: 20
+         marginLeft: 20,
      },
      itemOut: {
         alignSelf: 'flex-end',
         marginRight: 20
      },
      balloon: {
-        maxWidth: moderateScale(250, 2),
-        paddingHorizontal: moderateScale(10, 2),
+        maxWidth: moderateScale(500, 10),
+        paddingHorizontal: moderateScale(1, 2),
         paddingTop: moderateScale(5, 2),
         paddingBottom: moderateScale(7, 2),
         borderRadius: 20,

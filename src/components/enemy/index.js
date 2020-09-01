@@ -11,7 +11,7 @@ export default function Enemy(props){
           <View>
               <View style={[styles.item, styles.itemIn]}>
                 <View style={[styles.balloon, {backgroundColor: props.backColor}]}>
-          <Text style={{paddingTop: 5, color: 'white'}}>Os anelídeos são organismos que se destacam por apresentar corpo dividido em anéis. Esses animais apresentam ainda algumas características que permitem classificá-los em três classes:</Text>
+                <Text style={{paddingTop: 5, color: 'white'}}>{props.questionDialog}</Text>
           <View
           style={[
             styles.arrowContainer,

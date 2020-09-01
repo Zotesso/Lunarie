@@ -9,26 +9,34 @@ export default function Bottom(props){
           <View style={[styles.bottomContainer, {backgroundColor: props.backColor}]}>
               <View >
 
-                <TouchableOpacity style={[styles.answerButton, {backgroundColor: props.backColor}]}>
+                <TouchableOpacity 
+                onPress={() => {props.verifyIfCurrectAnswer(props.firstOption)}}
+                style={[styles.answerButton, {backgroundColor: props.backColor}]}>
                     <Text style={{color: 'white'}}>A</Text>
                 </TouchableOpacity>
-                <TouchableOpacity style={[styles.answerButton, {backgroundColor: props.backColor}]}>
+                <TouchableOpacity 
+                onPress={() => {props.verifyIfCurrectAnswer(props.secondOption)}}
+                style={[styles.answerButton, {backgroundColor: props.backColor}]}>
                     <Text style={{color: 'white'}}>B</Text>
                 </TouchableOpacity>
-                <TouchableOpacity style={[styles.answerButton, {backgroundColor: props.backColor}]}>
+                <TouchableOpacity
+                onPress={() => {props.verifyIfCurrectAnswer(props.thirdOption)}}
+                 style={[styles.answerButton, {backgroundColor: props.backColor}]}>
                     <Text style={{color: 'white'}}>C</Text>
                 </TouchableOpacity>
-                <TouchableOpacity style={[styles.answerButton, {backgroundColor: props.backColor}]}>
+                <TouchableOpacity
+                onPress={() => {props.verifyIfCurrectAnswer(props.fourthOption)}}
+                 style={[styles.answerButton, {backgroundColor: props.backColor}]}>
                     <Text style={{color: 'white'}}>D</Text>
                 </TouchableOpacity>
 
              </View>
 
                 <View style={styles.optionsContainer}>
-                    <Text style={styles.textOptions}>Gastrópodes, bivalves e cefalópodes.</Text>
-                    <Text style={styles.textOptions}>Quilópodes, diplópodes e crustáceos.</Text>
-                    <Text style={styles.textOptions}>Hidrozoários, cifozoários e antozoários.</Text>
-                    <Text style={styles.textOptions}>Poliquetas, oligoquetas e hirudíneos.</Text>
+                    <Text style={styles.textOptions}>{props.firstOption}</Text>
+                    <Text style={styles.textOptions}>{props.secondOption}</Text>
+                    <Text style={styles.textOptions}>{props.thirdOption}</Text>
+                    <Text style={styles.textOptions}>{props.fourthOption}</Text>
                 </View>
           </View>
     );
