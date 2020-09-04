@@ -17,6 +17,8 @@ export default function Main(){
     const [backColor, setBackColor] = useState('#333');
     const [loading, setLoading] = useState(false);
     const [question, setQuestion] = useState([]);
+    const [subject, setSubject] = useState([4]);
+    const [questionNumber, setQuestionNumber] = useState(1);
 
     const onGestureEvent = Animated.event(
         [
@@ -31,6 +33,7 @@ export default function Main(){
     );
 
     function onHandlerStateChange(event){
+            
         if(event.nativeEvent.oldState == State.ACTIVE){
             const {translationY} = event.nativeEvent;
             let opened = false;
@@ -57,20 +60,43 @@ export default function Main(){
         }
     }
 
-    async function loadQuestion(){
+    async function loadQuestionsTotalNumber(){
+        const response = await api.get(`/questions/total`);
+        let tmpArray = [];
+
+        tmpArray = response.data;
+         
+        setSubject(tmpArray);
+    }
+    useEffect(() => {
+        loadQuestionsTotalNumber();
+   }, []);
+
+
+    async function loadQuestion(selectedSubject){
+        let actualQuestion = 1;
+        setQuestionNumber(actualQuestion);
         if (loading){
-            return;
+            return;     
         }
 
+        while(actualQuestion == questionNumber){
+            actualQuestion = Math.floor(Math.random() * 2) + 1;
+            setQuestionNumber(actualQuestion);
+        }
+       
         setLoading(true);
-        const response = await api.get('/questions/Matemática/1');
+
+        // const response = await api.get(`/questions/${selectedSubject}/${questionNumber}`);
+        const response = await api.get(`/questions/Matemática/1`);
         setQuestion(response.data[0]);
 
         setLoading(false);
     }
     useEffect(() => {
-         loadQuestion();
+         loadQuestion(subject['Matemática']);
     }, []);
+
 
     function verifyIfCurrectAnswer(answer){
         if(answer === question['rightAnswer']){
@@ -117,8 +143,8 @@ export default function Main(){
                         }),
                         transform: [{
                             translateY:translateY.interpolate({
-                                inputRange:[-650 ,0],
-                                outputRange:[-650, 0],
+                                inputRange:[-350 ,0],
+                                outputRange:[-570, 0],
                                 extrapolate:'clamp',
                             }),
                         }]
@@ -126,6 +152,7 @@ export default function Main(){
                 >
                     <Menu 
                         setBackColor={setBackColor}
+                        loadQuestion={loadQuestion}
                     />
                     <Icon name='keyboard-arrow-up' 
           size={30} 
