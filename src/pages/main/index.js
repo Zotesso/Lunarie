@@ -14,11 +14,12 @@ export default function Main(){
     let offset = 0;
     const translateY = new Animated.Value(0);
 
-    const [backColor, setBackColor] = useState('#333');
-    const [loading, setLoading] = useState(false);
-    const [question, setQuestion] = useState([]);
-    const [subject, setSubject] = useState([4]);
     const [questionNumber, setQuestionNumber] = useState(1);
+    const [backColor, setBackColor] = useState('#333');
+    const [question, setQuestion] = useState([]);
+    const [subjects, setSubjects] = useState([4]);
+    const [actualSubject, setActualSubject] = useState('Matemática');
+    const [answered, setAnswered] = useState(false);
 
     const onGestureEvent = Animated.event(
         [
@@ -33,7 +34,6 @@ export default function Main(){
     );
 
     function onHandlerStateChange(event){
-            
         if(event.nativeEvent.oldState == State.ACTIVE){
             const {translationY} = event.nativeEvent;
             let opened = false;
@@ -60,50 +60,78 @@ export default function Main(){
         }
     }
 
-    async function loadQuestionsTotalNumber(){
-        const response = await api.get(`/questions/total`);
-        let tmpArray = [];
+    async function loadQuestion(){
+        let actualTotalSubjectQuestions;
 
-        tmpArray = response.data;
-         
-        setSubject(tmpArray);
-    }
-    useEffect(() => {
-        loadQuestionsTotalNumber();
-   }, []);
+        subjects.map((subject) =>{
+            if(subject['subject'] === actualSubject){{
+                actualTotalSubjectQuestions = subject['total'];
+            }}
+        })
 
+        if(!(questionNumber > actualTotalSubjectQuestions)){
+        const response = await api.get(`/questions/${actualSubject}/${questionNumber}`);
 
-    async function loadQuestion(selectedSubject){
-        let actualQuestion = 1;
-        setQuestionNumber(actualQuestion);
-        if (loading){
-            return;     
-        }
-
-        while(actualQuestion == questionNumber){
-            actualQuestion = Math.floor(Math.random() * 2) + 1;
-            setQuestionNumber(actualQuestion);
-        }
-       
-        setLoading(true);
-
-        // const response = await api.get(`/questions/${selectedSubject}/${questionNumber}`);
-        const response = await api.get(`/questions/Matemática/1`);
         setQuestion(response.data[0]);
-
-        setLoading(false);
+        }
     }
-    useEffect(() => {
-         loadQuestion(subject['Matemática']);
-    }, []);
 
+    useEffect(() => {
+        async function loadQuestionsTotalNumber(){
+            try{
+            const response = await api.get(`/questions/total`);
+            let tmpArray = [];
+    
+            tmpArray = response.data;
+        
+            setSubjects(tmpArray);
+            return response;
+            }
+            catch(error){
+                return error;
+            }
+        }
+
+        loadQuestionsTotalNumber();
+  }, []);
+
+    useEffect(() => {
+        setAnswered(false);
+
+        let nextQuestionNumber = questionNumber;
+        let actualTotalSubjectQuestions;
+
+        subjects.map((subject) =>{
+            if(subject['subject'] === actualSubject){{
+                actualTotalSubjectQuestions = subject['total'];
+            }}
+        })
+
+        if(!isNaN(actualTotalSubjectQuestions)){
+            if(actualTotalSubjectQuestions != 1){
+                nextQuestionNumber = Math.floor(Math.random() * actualTotalSubjectQuestions) + 1;
+            }
+        
+
+        if(nextQuestionNumber > actualTotalSubjectQuestions){
+            nextQuestionNumber = actualTotalSubjectQuestions;
+        }
+        setQuestionNumber(nextQuestionNumber);
+        }
+    }, [actualSubject, answered]);
+        
+    useEffect(() => {
+        loadQuestion();
+    }, [questionNumber, actualSubject]);
 
     function verifyIfCurrectAnswer(answer){
         if(answer === question['rightAnswer']){
             alert('Acertou!');
+            setAnswered(true);
         }
         else{
             alert('Erouuu!');
+            setAnswered(true);
         }
     }
 
@@ -152,7 +180,7 @@ export default function Main(){
                 >
                     <Menu 
                         setBackColor={setBackColor}
-                        loadQuestion={loadQuestion}
+                        setActualSubject={setActualSubject}
                     />
                     <Icon name='keyboard-arrow-up' 
           size={30} 
