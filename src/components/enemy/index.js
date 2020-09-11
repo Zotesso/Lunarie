@@ -11,7 +11,7 @@ export default function Enemy(props){
           <View>
               <View style={[styles.item, styles.itemIn]}>
                 <View style={[styles.balloon, {backgroundColor: props.backColor}]}>
-                <Text style={{paddingTop: 5, color: 'white'}}>{props.questionDialog}</Text>
+                <Text style={{paddingTop: 5, color: 'white', fontSize:16}}>{props.questionDialog}</Text>
           <View
           style={[
             styles.arrowContainer,
@@ -29,8 +29,10 @@ export default function Enemy(props){
             </Svg>
         </View>
         </View>
-          </View>
-              <Image source={enemy} style={styles.image} />
+          </View> 
+              <Image source={
+              props.image.length > 33 ? {uri: props.image} : enemy
+                } style={styles.image} />
           </View>
     );
 }

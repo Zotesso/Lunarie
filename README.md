@@ -1,10 +1,8 @@
 # Lunarie
 Mobile App developed with React Native, has the purpose of helping students to study in a more fun way.
 
-<div>
-<image width=30% src="https://i.postimg.cc/d0YcL7mk/git1.jpg">
-<image width=30% src="https://i.postimg.cc/tTR0NLc9/git2.jpg">
-<image width=30% src="https://i.postimg.cc/TPJMmRCk/git3.jpg">
+<div style="text-align:center">
+<image  src="assets/lunarie.gif">
 </div>
 
 ------------------------

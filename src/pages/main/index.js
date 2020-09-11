@@ -20,6 +20,7 @@ export default function Main(){
     const [subjects, setSubjects] = useState([4]);
     const [actualSubject, setActualSubject] = useState('Matemática');
     const [answered, setAnswered] = useState(false);
+    const [questionImg, setQuestionimg] = useState('');
 
     const onGestureEvent = Animated.event(
         [
@@ -73,6 +74,7 @@ export default function Main(){
         const response = await api.get(`/questions/${actualSubject}/${questionNumber}`);
 
         setQuestion(response.data[0]);
+        setQuestionimg(response.data['image_url']);
         }
     }
 
@@ -143,6 +145,7 @@ export default function Main(){
           <Enemy 
           backColor={backColor}
           questionDialog={question['questionDialog']}
+          image={questionImg}
           />
 
           </View>
@@ -163,7 +166,7 @@ export default function Main(){
                         position:'absolute',
                         height:'96%',
                         zIndex:50,
-                        bottom:'-90%',
+                        bottom:'-92%',
                         alignItems: 'center',
                         opacity: translateY.interpolate({
                             inputRange:[-300,0],
@@ -172,7 +175,7 @@ export default function Main(){
                         transform: [{
                             translateY:translateY.interpolate({
                                 inputRange:[-350 ,0],
-                                outputRange:[-570, 0],
+                                outputRange:[-670, 0],
                                 extrapolate:'clamp',
                             }),
                         }]

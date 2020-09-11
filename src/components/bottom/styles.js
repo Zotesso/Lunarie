@@ -5,31 +5,33 @@ export default StyleSheet.create({
         borderColor:'black',
         borderWidth:3,
         width: 350,
-        flex: 0.72,
+        flex: 0.6,
         flexDirection: 'row',
-        bottom:20,
+        bottom:16,
     },
 
     answerButton: {
+        flexDirection: 'row',
         borderColor:'black',
         borderWidth:1,
         flex:1,
-        width:100,
+        width:344,
         alignItems: 'center',
         justifyContent: 'center',
-    },
-
-    optionsContainer: {
-        flexDirection: 'column',
-        justifyContent: 'space-evenly',
-        flexGrow:1,
-        flex:1,
+        flexWrap:'wrap',
     },
     
+    option: {
+        alignSelf: 'flex-start',
+        marginRight: 6,
+        fontSize: 16,
+    },
+
     textOptions: {
         color: 'white',
         fontSize: 16,
-        marginBottom: 10,
-        
+        width:'92%',
+        alignSelf: 'flex-start',    
+     
     },
 })

@@ -12,7 +12,7 @@ export default StyleSheet.create({
     item: {
         zIndex: 5,
         flexDirection: 'row',
-        width: '120%',
+        width: '114%',
         alignSelf: 'center',
      },
      itemIn: {
@@ -23,7 +23,7 @@ export default StyleSheet.create({
         marginRight: 20
      },
      balloon: {
-        maxWidth: moderateScale(500, 10),
+        maxWidth: moderateScale(400, 10),
         paddingHorizontal: moderateScale(1, 2),
         paddingTop: moderateScale(5, 2),
         paddingBottom: moderateScale(7, 2),

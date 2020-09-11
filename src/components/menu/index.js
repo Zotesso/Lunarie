@@ -15,8 +15,8 @@ export default function Menu(props){
         </TouchableOpacity>
 
         <TouchableOpacity 
-        style={[styles.button, {backgroundColor: '#4429ba'}]} 
-        onPress={() => {props.setBackColor('#4429ba'); props.setActualSubject('Humanas')}}
+        style={[styles.button, {backgroundColor: '#BD3CBD'}]} 
+        onPress={() => {props.setBackColor('#BD3CBD'); props.setActualSubject('Humanas')}}
         >
           <Text style={styles.text}>Ciências Humanas</Text>
         </TouchableOpacity>
